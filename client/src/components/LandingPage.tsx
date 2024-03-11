@@ -1,11 +1,26 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleProfileClick = () => {
+    navigate('/profile');
+  };
+
+  const handleFundingClick = () => {
+    navigate('/funding');
+  }
+
   return (
-    <div>
-      <div>
-        <h1 >Buy me a chai 🍵</h1>
-        <p>A buy me a coffee alternative built on solana</p>
+    <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
+      <div className="text-center">
+        <h1 className="text-4xl font-bold text-gray-800 mb-4">Buy me a chai 🍵</h1>
+        <p className="text-lg text-gray-600 mb-8">A Buy Me a Coffee alternative built on Solana</p>
+      </div>
+      <div className="absolute top-0 right-0 mt-4 mr-4 flex">
+        <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mr-2" onClick={handleProfileClick}>Profile</button>
+        <button className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded" onClick={handleFundingClick}>Fund</button>
       </div>
     </div>
   );
