@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import {Badge, Avatar} from "@nextui-org/react";
+// import {NotificationIcon} from "./NotificationIcon.jsx";
+// import {CheckIcon} from "./CheckIcon.jsx";
+
+
 
 interface Profile {
   id: number;
@@ -39,6 +44,44 @@ const ProfileListPage: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md shadow-green-700">
       <h1 className="text-2xl font-bold mb-4 text-green-700">Fund your favorite creator</h1>
+      <div className="flex gap-3 items-center mb-4">
+      <Badge content="5" color="default">
+        <Avatar
+          radius="md"
+          src="https://i.pravatar.cc/150?u=a042f81f4e29026024d"
+        />
+      </Badge>
+      <Badge content="3" color="primary">
+        <Avatar
+          radius="md"
+          src="https://i.pravatar.cc/150?u=a04258a2462d826712d"
+        />
+      </Badge>
+      <Badge content="5" color="secondary">
+        <Avatar
+          radius="md"
+          src="https://i.pravatar.cc/300?u=a042581f4e29026709d"
+        />
+      </Badge>
+      <Badge content="4" color="success">
+        <Avatar
+          radius="md"
+          src="https://i.pravatar.cc/150?u=a04258114e29026302d"
+        />
+      </Badge>
+      <Badge content="1" color="warning">
+        <Avatar
+          radius="md"
+          src="https://i.pravatar.cc/150?u=a04258114e29026708c"
+        />
+      </Badge>
+      <Badge content="2" color="danger">
+        <Avatar
+          radius="md"
+          src="https://i.pravatar.cc/150?u=a042581f4e29026024d"
+        />
+      </Badge>
+    </div>
       <input
         type="text"
         placeholder="Search by name, username, or wallet address"
