@@ -37,8 +37,8 @@ const ProfileListPage: React.FC = () => {
   );
 
   return (
-    <div className="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-4">Fund your favorite creator</h1>
+    <div className="max-w-4xl mx-auto mt-8 p-6 bg-white rounded-lg shadow-md shadow-green-700">
+      <h1 className="text-2xl font-bold mb-4 text-green-700">Fund your favorite creator</h1>
       <input
         type="text"
         placeholder="Search by name, username, or wallet address"
