@@ -13,9 +13,16 @@ const LandingPage: React.FC = () => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
+    <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center ">
       <div className="text-center">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Buy me a chai 🍵</h1>
+        <h1 className="text-4xl font-bold text-black- mb-4">Buy me a  
+        <span className=' bg-gradient-to-l
+     from-purple-600
+     via-purple-700
+     to-purple-800
+     text-transparent
+     bg-clip-text   
+     hover:scale-110 transition-all duration-500 ease-in-out'> chai</span>  🍵</h1>
         <p className="text-lg text-gray-600 mb-8">A Buy Me a Coffee alternative built on Solana</p>
       </div>
       <div className="absolute top-0 right-0 mt-4 mr-4 flex">
