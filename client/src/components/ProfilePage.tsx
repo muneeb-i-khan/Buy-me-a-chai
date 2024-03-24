@@ -1,20 +1,22 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
+import { useWallet } from '@solana/wallet-adapter-react';
 
 const ProfilePage = () => {
+  const { publicKey } = useWallet();
   const [formData, setFormData] = useState({
     name: '',
     username: '',
-    walletAddress: ''
+    walletAddress: publicKey?.toBase58() || ''
   });
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [failureModalVisible, setFailureModalVisible] = useState(false);
 
-  const handleChange = (e:any) => {
+  const handleChange = (e: any) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e:any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/profile', formData);
@@ -48,7 +50,7 @@ const ProfilePage = () => {
         </div>
         <div className="mb-4">
           <label htmlFor="walletAddress" className="block text-gray-700">Wallet Address:</label>
-          <input type="text" id="walletAddress" name="walletAddress" value={formData.walletAddress} onChange={handleChange} className="form-input mt-1 block w-full" required />
+          <input type="text" id="walletAddress" name="walletAddress" value={formData.walletAddress} readOnly className="form-input mt-1 block w-full" required />
         </div>
         <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Submit</button>
       </form>
