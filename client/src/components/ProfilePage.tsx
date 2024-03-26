@@ -36,7 +36,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md shadow-blue-500">
+    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md shadow-blue-500" >
       <h1 className="text-2xl font-bold  mb-4 text-blue-500">Profile</h1>
       <div className='mb-4'>
       <Avatar isBordered color="primary" src="https://i.pravatar.cc/150?u=a04258a2462d826712d" />
