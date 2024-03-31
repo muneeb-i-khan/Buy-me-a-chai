@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useWallet } from '@solana/wallet-adapter-react';
 
@@ -11,14 +11,21 @@ const ProfilePage = () => {
   });
   const [successModalVisible, setSuccessModalVisible] = useState(false);
   const [failureModalVisible, setFailureModalVisible] = useState(false);
+  const [existingUserModalVisible, setExistingUserModalVisible] = useState(false);
 
-  const handleChange = (e: any) => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const existingUser = await checkExistingUser(formData.walletAddress);
+      if (existingUser) {
+        setExistingUserModalVisible(true);
+        return;
+      }
+
       const response = await axios.post('http://localhost:5000/profile', formData);
       console.log(response.data);
       setSuccessModalVisible(true);
@@ -34,6 +41,24 @@ const ProfilePage = () => {
 
   const closeFailureModal = () => {
     setFailureModalVisible(false);
+  };
+
+  const closeExistingUserModal = () => {
+    setExistingUserModalVisible(false);
+  };
+
+  const checkExistingUser = async (walletAddress) => {
+    try {
+      const response = await axios.get('http://localhost:5000/profile');
+
+      const existingWalletAddresses = response.data.data.map(user => user.walletAddress);
+      console.log(existingWalletAddresses);
+      const userExists = existingWalletAddresses.includes(walletAddress);
+      return userExists;
+    } catch (error) {
+      console.error(error);
+      return true;
+    }
   };
 
   return (
@@ -67,8 +92,17 @@ const ProfilePage = () => {
       {failureModalVisible && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-md">
-            <p className="text-red-600 font-bold">Failed to create profile. Please try again later.</p>
+            <p className="text-red-600 font-bold">Profile already exists.</p>
             <button onClick={closeFailureModal} className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Close</button>
+          </div>
+        </div>
+      )}
+
+      {existingUserModalVisible && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <p className="text-red-600 font-bold">User already registered.</p>
+            <button onClick={closeExistingUserModal} className="mt-4 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Close</button>
           </div>
         </div>
       )}
